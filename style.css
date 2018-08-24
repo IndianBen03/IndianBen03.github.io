@@ -5,14 +5,13 @@ body {
 a{
     text-decoration: none;
     color: green;
-    
-   
 }
 
 ol,ul{
     color:purple; font-size:150%;font-family:Rockwell;
 }
 
-h2,h3{
+.secondpage{
     color:red; font-size:300%;font-family:Verdana;
 }
+
