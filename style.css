@@ -62,6 +62,9 @@ header #branding{
 
 header #branding h1{
   margin:0;
+  font-family:Bookman;
+  font-size:30px;\
+  font-weight:bold;
 }
 
 header nav{
@@ -91,7 +94,7 @@ header a:hover{
   margin-top:100px;
   font-size:55px;
   margin-bottom:10px;
-}
+  }
 
 #showcase p{
   font-size:20px;
