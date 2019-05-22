@@ -1,0 +1,120 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+<body>
+<script type="text/processing">
+/** 
+  *@ Author: Ben Boben
+  *@Version: #1 05/27/2019
+  */
+  
+  
+int x = -200, y, vy = -1;
+int[]wx=new int[2];
+int[]wy=new int[2];
+int score = 0;
+int highScore = 0;
+int gamestate = 1;
+PImage backImg;
+PImage startImg;
+PImage birdImg;
+PImage wallImg;
+
+
+void setup(){
+size(1000,800);
+
+backImg = loadImage("./js/bg2.png"); //Make sure your file is in the same folder
+startImg = loadImage("./js/startscreen.png");
+birdImg = loadImage("./js/modi.png");
+wallImg = loadImage("./js/wall.png");
+fill(0);                        // Font Color
+textSize(40);                   // Font Size
+}
+
+
+
+void draw() {
+if(gamestate == 0){
+    imageMode(CORNER);
+    image(backImg,x,0);
+    image(backImg, x+backImg.width,0);
+    checkImage();
+   
+   //Bird Movement
+    x -=1.5;
+    vy +=1;
+    y += vy;
+    
+    //Random Walls
+    if(x==-1800) x=0;
+    for(int i = 0; i <2; i++){
+      image(wallImg, wx[i], wy[i] - (wallImg.height-500));
+      image(wallImg, wx[i], wy[i] + (wallImg.height-1100));
+      if(wx[i] < 5){
+      wy[i] = (int)random(500,height-60);   
+      wx[i] = width;
+  }
+  if(wx[i] == width) {
+    score++;  //Score counter
+    highScore = max(score, highScore);  //High Score counter
+  }
+  // Collision detection *GLITCH: Can go throug the wooden part of the spatula <-FIX in future
+  if(y>height || y<0 || (abs(width/2-wx[i])<60 && abs(y-wy[i]+200)>120)){
+    gamestate = 1;
+  }
+  wx[i] -= 6;
+    }
+     image(birdImg, width/2, y);
+    text(""+score/2, width/2-15,700); //Score text while playing
+}
+
+  else {
+  imageMode(CENTER);
+  image(startImg, width-300, height-400); //Start Image location
+  text("High Score: ", + highScore, 30, width);  //High Score text
+}
+}
+
+
+
+
+void mousePressed(){
+  vy=-12;
+  if(gamestate==1){
+    wx[0] = 800;  //Start of Bird and First Walls location
+    wy[0] = y = height/2;
+    wx[1] = 800;
+    wy[1] = 400;
+    x = gamestate = score = 0;
+   
+  }
+  
+}
+  
+
+
+
+
+void checkImage(){
+if(x<-backImg.width){  // Infinite Background Movement
+x=0; //Reset to beginning
+}
+}
+
+
+
+      //Restarts Game
+     void keyPressed(){
+        if (key == 'r' || key == 'R') {
+          gamestate = 1;
+        }
+      }
+
+</script>
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+</body>
+</html>
