@@ -1,0 +1,296 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+<body>
+<script type="text/processing">
+/**
+ * @Author; Ben Boben
+ * @Version: #1 + 06/05/2019
+ */
+
+int r;
+int g; 
+int b;
+int e = 4; //Size of ellipse (radius)
+int gameState = 0;
+int s = second();
+PImage kali;
+
+void setup() {
+  kali = loadImage("./js/kalei.png");
+  size(1500, 800);
+  background(0);
+}
+
+
+void draw() {
+  if (gameState ==0) {
+    imageMode(CORNER);
+    image(kali, 0, 0);
+    makeButton();
+  } 
+  else if (gameState ==1) {
+    
+    
+ // Times Commands that appear on screen
+    if(frameCount % 6000 == 100){
+    textSize(42);
+    fill(255);
+    text("Pick a Color and Draw",600,60);}
+    
+    
+        
+    if(frameCount % 6000 == 2000){
+  fill(0);
+  rect(452, 25, 660, 50);}
+  
+       
+     if(frameCount % 6000 == 2100){
+    fill(255);
+    text("Click Left Mouse to get Paper Blank",420,60);}
+    
+    if(frameCount % 6000 == 4000){
+  fill(0);
+  rect(410, 25, 780, 50);}
+  
+   if(frameCount % 6000 == 4100){
+    fill(255);
+    text("Press R to go back to Menu",550,60);}
+    
+    if(frameCount % 6000 == 5900){
+  fill(0);
+  rect(520, 25, 560, 50);}
+  
+    
+    if (mousePressed == true && mouseButton == LEFT) {
+      
+
+      //Colors Picker Buttons
+      Button2();
+      Button3();
+      Button4();
+      Button5();
+      Button6();
+      Button7();
+      Button8();
+      Button9();
+      
+      fill(r, g, b);
+
+      noStroke();
+      smooth();
+      frameRate(50000);
+
+      //Mirrored Lines and Drawing Mechanisms
+      //Comments based on if mouse moved to top right
+      ellipse(mouseX, mouseY, e, e); //Top Right
+      ellipse(width/2+(width/2-mouseX), mouseY, e, e); //Top Left
+      ellipse(mouseX, height/2+(height/2-mouseY), e, e); //Bottom Right
+      ellipse(width/2+(width/2-mouseX), height/2+(height/2-mouseY), e, e); //Bottom Left
+    }
+  }
+
+  if (mousePressed == true && mouseButton == RIGHT) {
+    background(0);
+  }
+}
+
+
+
+
+
+void makeButton() { //Start Button
+  fill(0);
+  if (mouseX>600 && mouseX <900 && mouseY >600 && mouseY<650) {
+    fill(random(255), random(255), random(255));   // Change to box to gray only if mouseX and mouseY are in the rectangle
+  }
+  rect(600, 600, 300, 50, 10); 
+  fill(255);
+  textSize(40);
+  if (mouseX>600 && mouseX <900 && mouseY >600 && mouseY<650) {
+    fill(0);   // Change test to blue only if mouseX and mouseY are in the rectangle
+    if (mousePressed) {
+      gameState = 1;
+       if (gameState == 1) {
+        background(0);
+        clear();
+      }
+    }
+  }
+
+  text("Click to Start!", 620, 640);
+}
+
+
+
+void keyPressed() { //Menu Button
+  if (key == 'r' || key == 'R') {
+          gameState = 0;
+        }
+}
+
+// Buttons of Color
+
+void Button2() { //Turqoise
+  fill(0, 255, 200); 
+  if (mouseX>50 && mouseX <75 && mouseY >40 && mouseY<65) {
+    fill(0, 200, 200);   // Change to box to gray only if mouseX and mouseY are in the rectangle
+  }
+  rect(50, 40, 25, 25, 10); 
+  //fill(0,255,200);
+  textSize(40);
+  if (mouseX>50 && mouseX <75 && mouseY >40 && mouseY<65) {
+
+    if (mousePressed) {
+      r = 0;
+      g = 255;
+      b = 200;
+    }
+  }
+}
+
+
+
+
+void Button3() { //Purple
+  fill(100, 0, 200); 
+  if (mouseX>80 && mouseX <105 && mouseY >40 && mouseY<65) {
+    fill(100, 0, 230);   // Change to box to gray only if mouseX and mouseY are in the rectangle
+  }
+  rect(80, 40, 25, 25, 10); 
+  //fill(100,0,200);
+  textSize(40);
+  if (mouseX>80 && mouseX <105 && mouseY >40 && mouseY<65) {
+
+    if (mousePressed) {
+
+      r = 100;
+      g = 0;
+      b = 200;
+    }
+  }
+}
+
+
+
+void Button4() { //Off White
+  fill(255, 255, 200); 
+  if (mouseX>110 && mouseX <135 && mouseY >40 && mouseY<65) {
+    fill(230, 255, 190);   // Change to box to gray only if mouseX and mouseY are in the rectangle
+  }
+  rect(110, 40, 25, 25, 10); 
+  textSize(40);
+  if (mouseX>110 && mouseX <135 && mouseY >40 && mouseY<65) {
+
+    if (mousePressed) {
+
+      r = 255;
+      g = 255;
+      b = 200;
+    }
+  }
+}
+
+
+void Button5() { //Red
+  fill(255, 35, 20); 
+  if (mouseX>140 && mouseX <165 && mouseY >40 && mouseY<65) {
+    fill(230, 30, 20);   // Change to box to gray only if mouseX and mouseY are in the rectangle
+  }
+  rect(140, 40, 25, 25, 10); 
+  textSize(40);
+  if (mouseX>140 && mouseX <165 && mouseY >40 && mouseY<65) {
+
+    if (mousePressed) {
+
+      r = 255;
+      g = 35;
+      b = 20;
+    }
+  }
+}
+
+
+void Button6() { //Orange
+  fill(255, 130, 40); 
+  if (mouseX>170 && mouseX <185 && mouseY >40 && mouseY<65) {
+    fill(250, 110, 30);   // Change to box to gray only if mouseX and mouseY are in the rectangle
+  }
+  rect(170, 40, 25, 25, 10); 
+  textSize(40);
+  if (mouseX>170 && mouseX <185 && mouseY >40 && mouseY<65) {
+
+    if (mousePressed) {
+
+      r = 255;
+      g = 130;
+      b = 40;
+    }
+  }
+}
+
+
+void Button7() { //Yellow
+  fill(255, 242, 0); 
+  if (mouseX>200 && mouseX <225 && mouseY >40 && mouseY<65) {
+    fill(240, 220, 10);   // Change to box to gray only if mouseX and mouseY are in the rectangle
+  }
+  rect(200, 40, 25, 25, 10); 
+  textSize(40);
+  if (mouseX>200 && mouseX <225 && mouseY >40 && mouseY<65) {
+
+    if (mousePressed) {
+
+      r = 255;
+      g = 242;
+      b = 0;
+    }
+  }
+}
+
+
+void Button8() { //Blue
+  fill(0, 20, 210); 
+  if (mouseX>230 && mouseX <255 && mouseY >40 && mouseY<65) {
+    fill(10, 28, 190);   // Change to box to gray only if mouseX and mouseY are in the rectangle
+  }
+  rect(230, 40, 25, 25, 10); 
+  textSize(40);
+  if (mouseX>230 && mouseX <255 && mouseY >40 && mouseY<65) {
+
+    if (mousePressed) {
+
+      r = 0;
+      g = 20;
+      b = 210;
+    }
+  }
+}
+
+
+
+void Button9() { //Green
+  fill(30, 250, 10); 
+  if (mouseX>260 && mouseX <285 && mouseY >40 && mouseY<65) {
+    fill(10, 210, 5);   // Change to box to gray only if mouseX and mouseY are in the rectangle
+  }
+  rect(260, 40, 25, 25, 10); 
+  textSize(40);
+  if (mouseX>260 && mouseX <285 && mouseY >40 && mouseY<65) {
+
+    if (mousePressed) {
+
+      r = 30;
+      g = 250;
+      b = 10;
+    }
+  }
+}
+
+</script>
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+</body>
+</html>
